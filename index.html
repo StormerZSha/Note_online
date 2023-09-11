@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note-online</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="list"></div>
+    <iframe src=""  id="notecontent"></iframe>
+    <div  id="codecontent"></div>
+    <script >
+        let namelist=[
+            'call,applay,bind.txt',
+            'common.js',
+            'css打字特效.html'
+        ]
+        let listdom=document.querySelector('#list')
+        let notecontent=document.querySelector('#notecontent')
+        let codecontent=document.querySelector('#codecontent')
+        for(let i=0;i<namelist.length;i++){
+            let listitem=document.createElement('div')
+            let adom=document.createElement('a')
+            adom.setAttribute('href','javascript:void(0);')
+            adom.innerText=namelist[i]
+            listdom.appendChild(adom)
+            listdom.appendChild(listitem)
+            adom.addEventListener('click',()=>{
+                notecontent.src=namelist[i]
+
+                if (namelist[i].slice(-4)=='html') { 
+                    notecontent.onload=()=>{
+                        console.log('加载完成');
+                        let test=notecontent.contentDocument.querySelector('html')
+                        codecontent.innerText=test.innerHTML
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>
