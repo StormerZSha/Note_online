@@ -1,4 +1,4 @@
-axios.get("../data/index.json").then(res=>{
+axios.get("./data/index.json").then(res=>{
     //tab栏初始化
     let typelist=res.data.type
     let tablistdom=document.querySelector('.tablist')
