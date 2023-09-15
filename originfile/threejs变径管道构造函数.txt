@@ -1,0 +1,49 @@
+    //变径管道
+	function VolatilePipe(cureve,aveRadius,valuesArr,mapValuesArr,segments){
+		var frames=compute(cureve,aveRadius,valuesArr,mapValuesArr,segments)
+		var geo=new BufferGeometry()
+		geo.setIndex(frames.indices)
+		geo.addAttribute('position',new Float32BufferAttribute(frames.vertices,3))
+		geo.computeVertexNormals()
+		return geo
+	}
+	VolatilePipe.prototype.constructor=VolatilePipe
+	//变径管道内部函数
+    function compute(curve,radiusArr,valuesArr,mapValuesArr,spl){
+		var Y=new Vector3(0,1,0)
+		var spl=spl||10
+		var angle=2*Math.PI/spl
+		var len=radiusArr.length//数组长度
+		var wellLength=cureve.getLength()
+
+		var vertices=[]
+		var indices=[]
+
+		vertices=radiusArr.map(function(v,i){//对半径数组进行调整
+          var back=[]
+		  var point=cureve.getPointAt(Math.abs(v[0]/wellLength))//相同半径的长度末端矢量
+          var _length=MathUtils.mapLinear(v[1],valuesArr[0],valuesArr[1],mapValuesArr[0],mapValuesArr[1])//半径长度线性映射
+		  var tangent=curve.getTangentAt(Math.abs(v[0]/wellLength))//切线/截面法线
+		  var normal=new Vector3()
+		  if(tangent.angleTo(Y)<Math.PI*5/180){
+			  normal.set(1,0,0).setLength(_length)
+		  }else{
+			  normal.crossVectors(tangent,Y).setLength(_length)
+		  }
+		  back=back.concat(normal.clone().add(point).toArray())
+		  for(var j=0;j<spl-1;j++){
+			  normal.applyAxisAngle(tangent,angle)
+			  back=back.concat(normal.clone().add(point).toArray())
+		  }
+		  return back;
+		}).reduce((pre,cur)=>pre.concat(cur),[])
+
+		for(var _i=0;_i<len-1;_i++){
+			var _t=_i*spl
+			for(var _j=0;_j<spl;_j++){
+				indices.push(_t+_j+spl,(_j===spl-1)?_t+_j+1:_t+_j+spl+1,(_j===spl-1)?_t:_t+_j+1);
+				indices.push(_t+_j,_t+spl+_j,(_j===spl-1)?_t:_t+_j+1);
+			}
+		}
+		return {vertices,indices}
+	}

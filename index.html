@@ -3,42 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note-online</title>
-    <style>
-    </style>
+    <title>test</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheet/index.css">
+    <link rel="stylesheet" type="text/css" href="./stylesheet/common.css">
 </head>
 <body>
-    <div id="list"></div>
-    <iframe src=""  id="notecontent"></iframe>
-    <div  id="codecontent"></div>
-    <script >
-        let namelist=[
-            'call,applay,bind.txt',
-            'common.js',
-            'css打字特效.html'
-        ]
-        let listdom=document.querySelector('#list')
-        let notecontent=document.querySelector('#notecontent')
-        let codecontent=document.querySelector('#codecontent')
-        for(let i=0;i<namelist.length;i++){
-            let listitem=document.createElement('div')
-            let adom=document.createElement('a')
-            adom.setAttribute('href','javascript:void(0);')
-            adom.innerText=namelist[i]
-            listdom.appendChild(adom)
-            listdom.appendChild(listitem)
-            adom.addEventListener('click',()=>{
-                notecontent.src=namelist[i]
+    <iframe src="./header.html" class="headeriframe"></iframe>
+    <iframe src="./cover.html" class="coveriframe" ></iframe>
+    <div class="indexContainer">
+        <div class="pagetitle">首页</div>
+        <div class="tablist">
 
-                if (namelist[i].slice(-4)=='html') { 
-                    notecontent.onload=()=>{
-                        console.log('加载完成');
-                        let test=notecontent.contentDocument.querySelector('html')
-                        codecontent.innerText=test.innerHTML
-                    }
-                }
-            })
-        }
-    </script>
+        </div>
+        <div class="listlist">
+            <div class="listitem">
+                <div class="itemname">测试条目名称</div>
+                <div class="itemtime">2023.09.15</div>
+            </div>
+            <div class="listitem">
+                <div class="itemname">测试条目名称2</div>
+                <div class="itemtime">2023.09.16</div>
+            </div>
+            <div class="listitem">
+                <div class="itemname">测试条目名称2</div>
+                <div class="itemtime">2023.09.16</div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/index.js" ></script>
 </body>
 </html>

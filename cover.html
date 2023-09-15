@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cover</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheet/common.css">
+</head>
+<body>
+    <div class="coverContainer">
+       <div class="cover"></div>
+       <div class="cover2"></div>
+       <div class="cover3"></div>
+       <div class="cover4"></div>
+       <div class="cover5"></div>
+       <div class="bigcover"></div>
+       <div class="line"></div>
+    </div>
+    <script >
+        window.onload=()=>{
+            let cover1=document.querySelector('.cover')
+            let cover2=document.querySelector('.cover2')
+            let cover3=document.querySelector('.cover3')
+            let cover4=document.querySelector('.cover4')
+            let cover5=document.querySelector('.cover5')
+            let bigcover=document.querySelector('.bigcover')
+            let line=document.querySelector('.line')
+            line.style.top='-100%'
+            let linetimer=setInterval(()=>{
+                let num=Number(line.style.top.slice(0,-1))
+                num+=0.2
+                line.style.top=num+'%'
+                if (num>-65) {
+                    clearInterval(linetimer)
+                    line.style.display='none'
+                    bigcover.style.display='none'
+                    let timer=setInterval(()=>{
+                        let num=Number(cover1.style.top.slice(0,-1))
+                        let num2=Number(cover2.style.top.slice(0,-1))
+                        let num3=Number(cover3.style.top.slice(0,-1))
+                        let num4=Number(cover4.style.top.slice(0,-1))
+                        let num5=Number(cover5.style.top.slice(0,-1))
+                        num-=0.3
+                        num2+=0.3
+                        num3-=0.3
+                        num4+=0.3
+                        num5-=0.3
+                        cover1.style.top=num+'%'
+                        cover2.style.top=num2+'%'
+                        cover3.style.top=num3+'%'
+                        cover4.style.top=num4+'%'
+                        cover5.style.top=num5+'%'
+                        if (num<=-100) {
+                            clearInterval(timer)
+                            window.frameElement.style.display='none'
+                        }
+
+                    },60/1000)
+                }
+            },60/1000)
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+sc config i8042prt start= disabled      //关闭
+
+sc config i8042prt start= auto            //打开

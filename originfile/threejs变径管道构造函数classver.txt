@@ -1,0 +1,68 @@
+//变径管道测试
+class VolatilePipe extends BufferGeometry{
+	constructor(curve,aveRadius,valuesArr,mapValuesArr,segments){
+	  super();
+	  this.type = 'VolatilePipe';
+	  this.parameters = {
+		  curve:curve,
+		  aveRadius:aveRadius,
+		  valuesArr:valuesArr,
+		  mapValuesArr:mapValuesArr,
+		  segments:segments
+	  };
+	  function compute(curve,radiusArr,valuesArr,mapValuesArr,spl){
+		  var Y=new Vector3(0,1,0)
+		  var spl=spl||10
+		  var angle=2*Math.PI/spl
+		  var len=radiusArr.length
+		  var wellLength=curve.getLength()
+
+		  var vertices=[]
+		  var indices=[]
+		  vertices=radiusArr.map(function(v,i){
+			  var back=[]
+			  var point=curve.getPointAt(Math.abs(v[0]/wellLength))
+			  var _length=MathUtils.mapLinear(v[1],valuesArr[0],valuesArr[1],mapValuesArr[0],mapValuesArr[1])
+			  var tangent=curve.getTangent(Math.abs(v[0]/wellLength))
+			  var normal=new Vector3()
+			  if (tangent.angleTo(Y)<Math.PI*5/180) {
+				  normal.set(1,0,0).setLength(_length)
+			  }else{
+				  normal.crossVectors(tangent,Y).setLength(_length)
+			  }
+			  back=back.concat(normal.clone().add(point).toArray())
+			  for(var j=0;j<spl-1;j++){
+				  normal.applyAxisAngle(tangent,angle)
+				  back=back.concat(normal.clone().add(point).toArray())
+			  }
+			  return back;
+		  }).reduce((pre,cur)=>pre.concat(cur),[]);
+
+		  for(var _i=0;_i<len-1;_i++){
+			  var _t=_i*spl;
+			  for(var _j=0;_j<spl;_j++){
+				  indices.push(_t+_j+spl,(_j==spl-1)?_t+_j+1:_t+_j+spl+1,(_j==spl-1)?_t:_t+_j+1)
+				  indices.push(_t+_j,_t+spl+_j,(_j==spl-1)?_t:_t+_j+1)
+			  }
+		  }
+		  return {vertices,indices}
+	  }
+
+	  var frames=compute(curve,aveRadius,valuesArr,mapValuesArr,segments)
+	  var geo=new BufferGeometry()
+	  geo.setIndex(frames.indices)
+	  geo.addAttribute('position',new Float32BufferAttribute(frames.vertices,3))
+	  geo.computeVertexNormals()
+	  
+	}
+
+// 	toJSON() {
+// 	  const data = super.toJSON();
+// 	  data.path = this.parameters.path.toJSON();
+// 	  return data;
+//   }
+
+//   static fromJSON(data) {
+// 	  return new VolatilePipe(new Curves[data.curve.type]().fromJSON(data.curve), data.aveRadius,data.valuesArr,data.mapValuesArr,data.segments);
+//   }
+  }

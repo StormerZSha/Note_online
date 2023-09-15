@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>header</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheet/common.css">
+</head>
+<body>
+    <div class="headerContainer">
+       <div class="logo">
+            <div class="name">XXXXXX</div>
+            <div class="about">about</div>
+       </div> 
+       <div class="menulist">
+          <div class="menuitem menuitemchecked" onclick="menuChange(0)">首页</div>
+          <div class="menuitem" onclick="menuChange(1)">AAAA</div>
+          <div class="menuitem" onclick="menuChange(2)">BBBB</div>
+          <div class="menuitem" onclick="menuChange(3)">CCCC</div>
+       </div>
+    </div>
+    <script >
+        const menuChange=(index)=>{
+            let menulist=document.querySelector('.menulist').children
+            for(let i=0;i<menulist.length;i++){
+                menulist[i].setAttribute('class','menuitem')
+            }
+            menulist[index].setAttribute('class','menuitem menuitemchecked')
+        }
+        
+
+    </script>
+</body>
+</html>
