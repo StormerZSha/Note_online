@@ -23,17 +23,23 @@ axios.get("./data/index.json").then(res=>{
     //列表初始化
     let listlistdom=document.querySelector('.listlist')
     let datalist=res.data.list
-    datalist['全部'].forEach(item=>{
-        let itemdiv=document.createElement('div')
-        itemdiv.setAttribute('class','listitem')
-        let namediv=document.createElement('div')
-        let timediv=document.createElement('div')
-        namediv.setAttribute('class','itemname')
-        namediv.innerHTML=item.name
-        timediv.setAttribute('class','itemtime')
-        timediv.innerHTML=item.time
-        itemdiv.appendChild(namediv)
-        itemdiv.appendChild(timediv)
-        listlistdom.appendChild(itemdiv)
-    })
+    for(let i in datalist){
+        datalist[i].forEach(item=>{
+            let itemdiv=document.createElement('div')
+            itemdiv.setAttribute('class','listitem')
+            let namediv=document.createElement('div')
+            let timediv=document.createElement('div')
+            namediv.setAttribute('class','itemname')
+            namediv.innerHTML=item.name
+            timediv.setAttribute('class','itemtime')
+            timediv.innerHTML=item.time
+            itemdiv.appendChild(namediv)
+            itemdiv.appendChild(timediv)
+            listlistdom.appendChild(itemdiv)
+            itemdiv.onclick=()=>{
+                window.location.href=`paragraph.html?name=${item.name}&time=${item.time}`
+            }
+        })
+    }
+    
 })

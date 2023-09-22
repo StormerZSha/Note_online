@@ -1,0 +1,56 @@
+html{
+    background-color: #111;
+}
+::-webkit-scrollbar
+{
+    width:8px;
+    height:auto;
+    background-color:transparent;
+}
+/*定义滚动条轨道
+ 内阴影+圆角*/
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius:10px;
+}
+/*定义滑块
+ 内阴影+圆角*/
+::-webkit-scrollbar-thumb
+{
+    border-radius:10px;
+    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);
+    background-color:#555;
+}
+.paragraphContainer{
+    height: 600px;
+    background-color: #111;
+    margin-top: 55px;
+    padding: 0 19%;
+    padding-top: 80px;
+    overflow-y: scroll;
+}
+.paragraphContainer .pagetitle{
+    font-size: 44px;
+    color: #fff;
+    font-weight: 900;
+    margin-left: 20px;
+}
+.paragraphContainer .pagetime{
+    font-size: 14px;
+    color: #fff;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.paragraphContainer .content .contentitem{
+    font-size: 16px;
+    color: #ccc;
+    margin-top: 80px;
+}
+.paragraphContainer .content .code{
+    font-style: italic;
+    padding: 5px;
+    border-radius: 5px;
+    background: #121212;
+    box-shadow: inset -5px -5px 0px #292727, inset 5px 5px 0px #292828;
+}

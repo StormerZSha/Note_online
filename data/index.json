@@ -3,25 +3,28 @@
         "全部",
         "css",
         "javascript",
-        "杂"
+        "杂",
+        "threejs",
+        "openlayers",
+        "cesiums"
     ],
     "list":{
-        "全部":[
-            {
-                "name":"开关笔记本键盘",
-                "url":"./orginfile/关闭或打开笔记本键盘.txt",
-                "time":"2020.10.26"
-            },
-            {
-                "name":"threejs实现变径管道",
-                "url":["./orginfile/threejs变径管道构造函数","./orginfile/threejs变径管道构造函数classver"],
-                "time":"2021.08.16"
-            }
-        ],
+
         "html":[],
         "css":[],
         "javascript":[],
-        "杂":[],
+        "杂":[
+            {
+                "name":"开关笔记本键盘",
+                "time":"2020.10.26"
+            }
+        ],
+        "threejs":[
+            {
+                "name":"threejs实现变径管道",
+                "time":"2021.08.16"
+            }
+        ],
         "openlayers":[],
         "cesiums":[]
     }
