@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{
+            position: relative;
+            width: 200px;
+            height: 45px;
+            background-color: #fff;
+            color: #6cf;
+            text-align: center;
+            line-height: 45px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        .btn::before{
+            content: "";
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 1px;
+            right: -2px;
+            top: -2px;
+            background-color: #6cf;
+            z-index: -1;
+            transition: width .4s linear,height .4s linear;
+        }
+        .btn:hover::before{
+            content: '';
+            transition: width .4s linear,height .4s linear;
+            width: 201px;
+            height: 46px;
+        }
+        .btn:after{
+            content:"";
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 1px;
+            left: -2px;
+            bottom: -2px;
+            background-color:#6cf;
+            z-index: -1;
+            transition: width .4s linear,height .4s linear;
+        }
+        .btn:hover::after{
+            content: "";
+            transition: width .4s linear,height .4s linear;
+            width: 201px;
+            height: 46px;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">按钮</div>
+</body>
+</html>

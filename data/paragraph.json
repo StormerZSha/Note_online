@@ -9,6 +9,16 @@
             "url":["./threejs变径管道构造函数.txt","./threejs变径管道构造函数classver.txt"],
             "type":"code",
             "addition":""
+        },
+        "css实现打字特效":{
+            "url":"./css打字特效.html",
+            "type":"code",
+            "addition":"example"
+        },
+        "css实现按钮动态边框":{
+            "url":"./css按钮边框特效.html",
+            "type":"code",
+            "addition":"example"
         }
     }
 }

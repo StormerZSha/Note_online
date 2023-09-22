@@ -54,3 +54,8 @@ html{
     background: #121212;
     box-shadow: inset -5px -5px 0px #292727, inset 5px 5px 0px #292828;
 }
+.paragraphContainer .content .exampleitem{
+    border-radius: 5px;
+    box-shadow: inset -5px -5px 0px #292727, inset 5px 5px 0px #292828;
+    margin-top: 15px;
+}

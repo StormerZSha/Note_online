@@ -9,16 +9,22 @@ pagetitledom.innerHTML=paragraphTitle
 pagetimedom.innerHTML=paragraphTime
 
 //生成dom
-const renderNewdom=(text,type)=>{
+const renderNewdom=(text,type,addition)=>{
     let content=document.querySelector('.content')
     let contentitem=document.createElement('div')
     contentitem.setAttribute('class','contentitem')
     if (type=='code') {
         contentitem.setAttribute('class','contentitem code')
     }
-    let test=document.createElement('code')
-    contentitem.innerText=`${text}`
+    contentitem.innerText=text
+    if (addition.includes('example')) {
+        let exampleitem=document.createElement('div')
+        exampleitem.setAttribute('class','exampleitem')
+        exampleitem.innerHTML=text
+        content.appendChild(exampleitem)
+    }
     content.appendChild(contentitem)
+    
 }
 //获取内容
 axios.get("./data/paragraph.json").then(async res=>{
@@ -26,12 +32,12 @@ axios.get("./data/paragraph.json").then(async res=>{
     let currentitem=contentlist[paragraphTitle]
     if (!Array.isArray(currentitem.url)) {
         axios.get('./originfile/'+currentitem.url).then(file=>{
-            renderNewdom(file.data,currentitem.type)
+            renderNewdom(file.data,currentitem.type,currentitem.addition)
         })
     }else{
         for(let i=0;i<currentitem.url.length;i++){
-            const file=await axios.get('../originfile/'+currentitem.url[i])
-            renderNewdom(file.data,currentitem.type)
+            const file=await axios.get('./originfile/'+currentitem.url[i])
+            renderNewdom(file.data,currentitem.type,currentitem.addition)
         }
     }
     
