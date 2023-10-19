@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拖放示例</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      width: 300px;
+      height: 500px;
+      border: 2px solid blue;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image {
+      width: 80%;
+      height: 50px;
+      border: 1px solid #f00;
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      line-height: 50px;
+      margin-top: 15px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box" id="left-box">
+      <div class="image" id="image-1" draggable="true">1</div>
+      <div class="image" id="image-2" draggable="true">2</div>
+      <div class="image" id="image-3" draggable="true">3</div>
+      <div class="image" id="image-4" draggable="true">4</div>
+      <div class="image" id="image-5" draggable="true">5</div>
+    </div>
+    <div class="box" id="right-box"></div>
+  </div>
+
+  <script>
+    // 获取DOM元素
+    const leftBox = document.getElementById("left-box");
+    const rightBox = document.getElementById("right-box");
+    const images = document.querySelectorAll(".image");
+
+    // 定义一个变量，用来存储被拖动的元素
+    let draggedImage = null;
+
+    // 给每个图片元素添加拖动事件监听器
+    for (let image of images) {
+      // 当开始拖动时，设置被拖动的元素为当前元素，并改变其透明度
+      image.addEventListener("dragstart", function () {
+        draggedImage = this;
+        this.style.opacity = "0.5";
+      });
+
+      // 当结束拖动时，恢复被拖动元素的透明度
+      image.addEventListener("dragend", function () {
+        this.style.opacity = "1";
+        draggedImage = null;
+      });
+    }
+
+    // 给左边的盒子添加拖放事件监听器
+    leftBox.addEventListener("dragover", function (e) {
+      // 阻止默认行为，否则无法触发drop事件
+      e.preventDefault();
+    });
+
+    leftBox.addEventListener("drop", function (e) {
+      // 如果被拖动的元素不是左边盒子的子元素，则将其添加到左边盒子中，并移除右边盒子的边框颜色
+      if (draggedImage && !this.contains(draggedImage)) {
+        this.appendChild(draggedImage);
+      }else{//如果斯左边的子元素
+          // 获取鼠标相对于目标元素的垂直偏移量
+          let offset = e.offsetY - draggedImage.offsetTop;
+          // 如果偏移量小于0，则表示鼠标在目标元素的上半部分，将被拖动元素插入到目标元素之前
+          if (offset < 10) {
+            console.log(draggedImage,e.target);
+            this.insertBefore(draggedImage, e.target);
+          }// 如果偏移量大于等于0，则表示鼠标在目标元素的下半部分，将被拖动元素插入到目标元素之后
+          else {
+            
+            this.insertBefore(draggedImage, null);
+          }
+      }
+    });
+
+    // 给右边的盒子添加拖放事件监听器
+    rightBox.addEventListener("dragover", function (e) {
+      // 阻止默认行为，否则无法触发drop事件
+      e.preventDefault();
+
+    });
+
+    rightBox.addEventListener("drop", function (e) {
+      // 如果被拖动的元素不是右边盒子的子元素，则将其添加到右边盒子中，并移除右边盒子的边框颜色
+      if (draggedImage && !this.contains(draggedImage)) {
+        this.appendChild(draggedImage);
+      }else{
+        let offset = e.offsetY - draggedImage.offsetTop;
+        // 如果偏移量小于0，则表示鼠标在目标元素的上半部分，将被拖动元素插入到目标元素之前
+        if (offset < 10) {
+          this.insertBefore(draggedImage, e.target);
+        }
+        // 如果偏移量大于等于0，则表示鼠标在目标元素的下半部分，将被拖动元素插入到目标元素之后
+        else {
+          this.insertBefore(draggedImage, null);
+        }
+      }
+    });
+
+
+  </script>
+</body>
+</html>

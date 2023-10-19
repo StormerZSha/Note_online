@@ -24,6 +24,11 @@
             "url:":"./中国也曾有过夏令时.txt",
             "type":"杂",
             "addition":""
+        },
+        "拖拽穿梭框(bingchat写的我小改一点)":{
+            "url":"./拖拽穿梭框.html",
+            "type":"code",
+            "addition":"example"
         }
     }
 }
