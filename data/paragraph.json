@@ -29,6 +29,11 @@
             "url":"./拖拽穿梭框.html",
             "type":"code",
             "addition":"example"
+        },
+        "可编辑的echarts折线图":{
+            "url":"./可编辑的echarts折线图.html",
+            "type":"code",
+            "addition":"example"
         }
     }
 }
