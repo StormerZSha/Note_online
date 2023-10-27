@@ -61,3 +61,7 @@ html{
     position: relative;
     z-index: 0;
 }
+.paragraphContainer .content .noteitem{
+    color: #aaa;
+    margin-left: 20px;
+}

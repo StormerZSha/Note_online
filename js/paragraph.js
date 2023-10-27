@@ -21,6 +21,10 @@ const renderNewdom=(text,type,addition)=>{
         let exampleitem=document.createElement('div')
         exampleitem.setAttribute('class','exampleitem')
         exampleitem.innerHTML=text
+        let noteitem=document.createElement('div')
+        noteitem.setAttribute('class','noteitem')
+        noteitem.innerHTML='*若样例没有展示出预期效果,请复制到本地运行'
+        content.appendChild(noteitem)
         content.appendChild(exampleitem)
     }
     content.appendChild(contentitem)
@@ -30,6 +34,7 @@ const renderNewdom=(text,type,addition)=>{
 axios.get("./data/paragraph.json").then(async res=>{
     let contentlist=res.data.list
     let currentitem=contentlist[paragraphTitle]
+    console.log(contentlist,paragraphTitle);
     if (!Array.isArray(currentitem.url)) {
         axios.get('./originfile/'+currentitem.url).then(file=>{
             renderNewdom(file.data,currentitem.type,currentitem.addition)
